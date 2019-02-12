@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>DIW Castillo</title>
+        <script src="jquery-3.3.1.js" charset="utf-8"></script>
+        <style media="screen">
+            body{
+                margin: 0;
+                fotn-family: sans-serif;
+            }
+
+            header{
+                width: 100%;
+                background: #4E94AB;
+            }
+
+            #btn-menu{
+                display:none;
+
+            }
+
+            header label {
+                display: block;
+                width:30px;
+                height: 30px;
+                padding: 10px;
+                border-right: 1px solid #fff;
+            }
+
+            #botonm{
+                width:30px;
+                height:30px;
+                background: #4E94AB;
+            }
+
+            header label:hover {
+                cursor: pointer;
+                background: rgba(0,0,8,0.3);
+            }
+            .menu ul{
+                margin:0;
+                list-style: none;
+                padding:0;
+                display:flex;
+            }
+            .menu li {
+                border-right: 1px solid #fff;
+
+            }
+
+
+            .menu li:hover{
+                background: rgba(0,0,0,0.3);
+            }
+
+
+            .menu li a {
+                display: block;
+                padding: 15px 20px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            @media (max-width:768px){
+                header label {
+                    display: block;
+                }
+
+                .menu {
+                    position: absolute;
+                    background: #4E94AB;
+                    width: 70%;
+                    margin-left: -70%;
+                }
+
+                .menu ul {
+                    flex-direction: column;
+                }
+
+                .menu li {
+                    border-top: 1px solid #fff;
+                }
+
+                #btn-menu:checked ~ .menu {
+                    margin: 0;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+            $(function() {
+                $("#fondo").click(function () {
+                    $("body").css("background",$(this).val());
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <input type="checkbox" id="btn-menu">
+            <label for="btn-menu"><img id="botonm" src="./img/iconos/botonMenu.png" alt=""></label>
+            <nav class="menu">
+                <ul>
+                    <li><a id="insert" href="">Insertar elemento</a>
+                        <ul>
+                            <li><select name="ad">
+                                   <option selected>FONDO
+                                   <option value="">Color de fondo
+                                   <option value="">Añadir imágen
+                               </select></li>
+                            <li><select name="ad">
+                                   <option selected>ELEMENTOS
+                                   <option value="xxxx.htm">Tabla
+                                   <option value="yyyy.htm">Formulario
+                                   <option value="zzzz.htm">Etiqueta
+                               </select></li>
+                            <li>
+                                <input id="letra" type="color" value="">Color de letra</input>
+                                <input id="fondo" type="color" value="">Color de fondo</input>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a id="update" href="">Modificar elemento</a>
+                        <select name="ad">
+                               <option selected> Crear:
+                               <option value="xxxx.htm">texto 1
+                               <option value="yyyy.htm">texto 2
+                               <option value="zzzz.htm">texto 3
+                           </select>
+                    </li>
+                    <li><a id="delete" href="">Borrar elemento</a>
+                        <ul>
+                            <li><button type="button" name="button">Párrafo</button></li>
+                            <li><button type="button" name="button">Bloque</button></li>
+                            <li><button type="button" name="button">Elemento</button></li>
+                            <li><button type="button" name="button">Imágen</button></li>
+                        </ul>
+                    </li>
+                    <li><a href="prod.html">Modo Vista preliminar</a></li>
+                    <li><a href="index.html">Salir</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="">
+            <iframe width='100' height='300' scrolling='no' frameborder='no' allow='autoplay' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'></iframe>
+        </div>
+    </body>
+</html>
