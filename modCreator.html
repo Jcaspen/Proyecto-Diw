@@ -88,9 +88,14 @@
             }
         </style>
         <script type="text/javascript">
+
             $(function() {
-                $("#fondo").click(function () {
+                $("#fondo").change(function () {
                     $("body").css("background",$(this).val());
+                });
+
+                $("#abstract").on("click", function (e) {
+                    $("body").css({"background-image":`url(${$(this).val()})`});
                 });
             });
         </script>
@@ -103,10 +108,12 @@
                 <ul>
                     <li><a id="insert" href="">Insertar elemento</a>
                         <ul>
-                            <li><select name="ad">
+                            <button type="button" name="button" id="abstract" value="'./img/abstracto.jpeg'">Abstracto</button>
+                            <!-- <input type="text" name="./img/abstracto.jpeg" value="Abstracto" > -->
+                            <li><select name="ad" id="imagenfondo">
                                    <option selected>FONDO
-                                   <option value="">Color de fondo
-                                   <option value="">Añadir imágen
+                                   <option value="./img/abstracto.jpeg">Abstracto
+                                   <option value="./img/arbol.jpeg">Árbol
                                </select></li>
                             <li><select name="ad">
                                    <option selected>ELEMENTOS
@@ -115,8 +122,8 @@
                                    <option value="zzzz.htm">Etiqueta
                                </select></li>
                             <li>
-                                <input id="letra" type="color" value="">Color de letra</input>
-                                <input id="fondo" type="color" value="">Color de fondo</input>
+                                <input id="letra" type="color" >Color de letra</input>
+                                <input id="fondo" type="color" >Color de fondo</input>
                             </li>
                         </ul>
                     </li>
