@@ -86,16 +86,44 @@
                     margin: 0;
                 }
             }
+
+
         </style>
         <script type="text/javascript">
+            function agregarTabla(filas, columna) {
+                var tbl = document.getElementById("tabla");
+                var tblBody = document.createElement("tbody");
+                for (var i = 0; i < columna; i++) {
+                    var fila = document.createElement("tr");
+                    for (var j = 0; j < filas; j++) {
+                        var celda = document.createElement("td");
+                        var textoCelda = document.createTextNode(i+"-"+j);
+                        celda.appendChild(textoCelda);
+                        fila.appendChild(celda);
+                    }
+                    tblBody.appendChild(fila);
+                }
+                tbl.appendChild(tblBody);
+                tbl.setAttribute("border", "2");
+
+            }
 
             $(function() {
                 $("#fondo").change(function () {
                     $("body").css("background",$(this).val());
                 });
 
-                $("#abstract").on("click", function (e) {
-                    $("body").css({"background-image":`url(${$(this).val()})`});
+                $("#imagenfondo").each(function() {
+                    $(this).on("click", function (e) {
+                        $("body").css({"background-image":`url(${$(this).val()})`});
+                    });
+                });
+
+                $("#elementos").click(function () {
+                    var filas=prompt("Introduce un numero de filas");
+                    var column=prompt("Introduce un número de columnas");
+                    agregarTabla(filas,column);
+
                 });
             });
         </script>
@@ -106,29 +134,40 @@
             <label for="btn-menu"><img id="botonm" src="./img/iconos/botonMenu.png" alt=""></label>
             <nav class="menu">
                 <ul>
-                    <li><a id="insert" href="">Insertar elemento</a>
+                    <li><a id="insert" href="">Modificar Fondo</a>
                         <ul>
-                            <button type="button" name="button" id="abstract" value="'./img/abstracto.jpeg'">Abstracto</button>
-                            <!-- <input type="text" name="./img/abstracto.jpeg" value="Abstracto" > -->
                             <li><select name="ad" id="imagenfondo">
                                    <option selected>FONDO
                                    <option value="./img/abstracto.jpeg">Abstracto
                                    <option value="./img/arbol.jpeg">Árbol
-                               </select></li>
-                            <li><select name="ad">
-                                   <option selected>ELEMENTOS
-                                   <option value="xxxx.htm">Tabla
-                                   <option value="yyyy.htm">Formulario
-                                   <option value="zzzz.htm">Etiqueta
-                               </select></li>
-                            <li>
-                                <input id="letra" type="color" >Color de letra</input>
-                                <input id="fondo" type="color" >Color de fondo</input>
-                            </li>
+                                   <option value="./img/elefante.jpeg">Elefante
+                                   <option value="./img/flower.jpg">Flor
+                                   <option value="./img/mar.jpeg">Mar
+                                   <option value="./img/muro.jpeg">Muro
+                                   <option value="./img/paisaje.jpeg">Paisaje
+                                   <option value="./img/pintura.jpeg">Pintura
+                                   <option value="./img/tiempo.jpeg">Tiempo
+                                   <option value="./img/xbox.jpeg">Gamer
+                                </select></li>
+                               <li>
+                                   <input id="fondo" type="color" >Color de fondo</input>
+                               </li>
                         </ul>
                     </li>
 
                     <li><a id="update" href="">Modificar elemento</a>
+                        <ul>
+                            <li><select name="ad" id="elementos">
+                                    <option selected>ELEMENTOS
+                                    <option value="xxxx.htm">Tabla
+                                    <option value="yyyy.htm">Formulario
+                                    <option value="zzzz.htm">Etiqueta
+                                </select>
+                            </li>
+                            <li>
+                                <input id="letra" type="color" >Color de letra</input>
+                            </li>
+                        </ul>
                         <select name="ad">
                                <option selected> Crear:
                                <option value="xxxx.htm">texto 1
@@ -152,6 +191,12 @@
 
         <div class="">
             <iframe width='100' height='300' scrolling='no' frameborder='no' allow='autoplay' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'></iframe>
+        </div>
+
+        <div class="">
+            <table id="tabla">
+
+            </table>
         </div>
     </body>
 </html>
