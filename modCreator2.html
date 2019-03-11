@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DIW Castillo</title>
+        <script src="jquery-3.3.1.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>
+            var contadorTabla=0;
+            var contadorTitulo=0;
+            var contadorParrafos=0;
+            var contadorBoton=0;
+            var contadorEnlace=0;
+            var contadorCanvas=0;
+            var contadorLista=0;
+            var contadorInput=0;
+
+            function agregarInput() {
+                var entrada=prompt("Texto al lado del cuadro");
+                $("body").append(`<input id="inp${contadorInput}" type="text" name="input${contadorInput}" value=""><label for="input${contadorInput}">${entrada}</label>`);
+                $(`#inp${contadorInput}`).draggable();
+                contadorInput++;
+
+            }
+
+            function agregarLista() {
+                var entrada=prompt("Texto");
+                $("body").append(`<li id="lis${contadorLista}">${entrada}</li>`);
+                $(`#lis${contadorLista}`).draggable();
+                contadorLista++;
+            }
+            function agregarCanvas() {
+                $("body").append(`<canvas id="canvas${contadorCanvas}" width="200" height="100" style="border:1px solid #000FFF;"></canvas>`);
+                $(`#canvas${contadorCanvas}`).draggable();
+                $(`#canvas${contadorCanvas}`).dblclick(function () {
+                    $(`#canvas${contadorCanvas}`).draggable("option", "disabled", true );
+                });
+                contadorCanvas++;
+            }
+            function agregarEnlace() {
+                var entrada=prompt("Texto de enlace");
+                var url= prompt("Escribe la URL");
+                $("body").append(`<a href="${url}" id="enlace${contadorEnlace}">${entrada}</a>`);
+                $(`#enlace${contadorEnlace}`).draggable();
+
+                contadorEnlace++;
+            }
+            function agregarBoton() {
+                var entrada=prompt("¿Cómo se llamará el botón?");
+                $("body").append(`<button class="btn btn-default" type="button" id="boton${contadorBoton}">${entrada}</button>`);
+                $(`#boton${contadorBoton}`).draggable();
+                contadorBoton++;
+            }
+            function agregarTexto() {
+                var entrada=prompt("Introduce un texto");
+                $("body").append(`<p id="pa${contadorParrafos}">${entrada}</p>`);
+                $(`#pa${contadorParrafos}`).draggable();
+                contadorParrafos++;
+            }
+            function agregarTitulo(valor) {
+                var entrada=prompt("Introduce un titulo");
+                $("body").append(`<h${valor} id="titulo${contadorTitulo}">${entrada}</h${valor}>`);
+                $(`#titulo${contadorTitulo}`).draggable();
+                contadorTitulo++;
+            }
+
+            function agregarTabla(filas, columna) {
+                $("body").append(`<div><table id="tabla${contadorTabla}"></table></div>`);
+                var tbl = document.getElementById(`tabla${contadorTabla}`);
+                var tblBody = document.createElement("tbody");
+                for (var i = 0; i < columna; i++) {
+                    var fila = document.createElement("tr");
+                    for (var j = 0; j < filas; j++) {
+                        var celda = document.createElement("td");
+                        var textoCelda = document.createTextNode(i+"-"+j);
+                        celda.appendChild(textoCelda);
+                        fila.appendChild(celda);
+                        $(celda).on("click",function() {
+                            var entrada= prompt("inserte algo");
+                            this.childNodes[0].nodeValue=entrada;
+                        });
+                    }
+                    tblBody.appendChild(fila);
+                }
+
+                tbl.appendChild(tblBody);
+                tbl.setAttribute("border", "2");
+                $(`#tabla${contadorTabla}`).draggable();
+                contadorTabla++;
+            }
+
+            $(function() {
+
+                $("#fondo").change(function () {
+                    $("body").css("background",$(this).val());
+                });
+                $("#letrac").change(function () {
+                    $("body").css("color",$(this).val());
+                });
+
+                $("#tlserif").click(function () {
+                    $("body").css("font-family",$(this).attr("valor"));
+                });
+                $("#tlsans").click(function () {
+                    $("body").css("font-family",$(this).attr("valor"));
+                });
+                $("#tlmono").click(function () {
+                    $("body").css("font-family",$(this).attr("valor"));
+                });
+                $("#tlcursive").click(function () {
+                    $("body").css("font-family",$(this).attr("valor"));
+                });
+                $("#tlfantasy").click(function () {
+                    $("body").css("font-family",$(this).attr("valor"));
+                });
+                $("#tl8").click(function () {
+                    $("body").css("font-size",$(this).attr("valor"));
+                });
+                $("#tl12").click(function () {
+                    $("body").css("font-size",$(this).attr("valor"));
+                });
+                $("#tl16").click(function () {
+                    $("body").css("font-size",$(this).attr("valor"));
+                });
+                $("#tl20").click(function () {
+                    $("body").css("font-size",$(this).attr("valor"));
+                });
+
+                $("#tt").click(function () {
+                    agregarTitulo(1)
+                });
+                $("#tt2").click(function () {
+                    agregarTitulo(3)
+                });
+                $("#tt4").click(function () {
+                    agregarTitulo(4)
+                });
+                $("#ttp").click(function () {
+                    agregarTexto();
+                });
+
+                $("#bboton").click(function () {
+                    agregarBoton();
+                });
+                $("#benlace").click(function () {
+                    agregarEnlace();
+                });
+
+                $("#vistapre").click(function () {
+                    $("#musica").hide();
+                    $("#menus").hide();
+                });
+
+
+                $("#imagenfondo").each(function() {
+                    $(this).on("click", function (e) {
+                        $("body").css({"background-image":`url(${$(this).val()})`});
+                    });
+                });
+
+                $("#btabla").click(function () {
+                    var expr=/^\d$/;
+                    var filas=parseInt(prompt("Introduce un numero de filas"));
+                    var column=parseInt(prompt("Introduce un número de columnas"));
+                    if(expr.test(filas)&& expr.test(column)){
+                        agregarTabla(filas,column);
+                    }else{
+                        alert("Insertar un número del 1 al 9");
+                    }
+                });
+
+                $("#blcanvas").click(function () {
+                    agregarCanvas();
+                });
+
+                $("#blistas").click(function () {
+                    agregarLista();
+                });
+                $("#bcuadro").click(function () {
+                    agregarInput();
+                });
+
+                $("#musica").draggable();
+
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav id="menus" class="navbar navbar-default">
+                FONDO:
+                <select name="ad" id="imagenfondo">
+                       <option selected>FONDO
+                       <option value="./img/abstracto.jpeg">Abstracto
+                       <option value="./img/arbol.jpeg">Árbol
+                       <option value="./img/elefante.jpeg">Elefante
+                       <option value="./img/flower.jpg">Flor
+                       <option value="./img/mar.jpeg">Mar
+                       <option value="./img/muro.jpeg">Muro
+                       <option value="./img/paisaje.jpeg">Paisaje
+                       <option value="./img/pintura.jpeg">Pintura
+                       <option value="./img/tiempo.jpeg">Tiempo
+                       <option value="./img/xbox.jpeg">Gamer
+                    </select>
+                <input id="fondo" type="color" ></input>
+                INSERTAR:
+                <button class="btn btn-warning" type="submit" id="btabla">Tabla</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tipo de Texto<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="tt">H1</a></li>
+                        <li><a href="#" id="tt2">H3</a></li>
+                        <li><a href="#" id="tt4">H4</a></li>
+                        <li><a href="#" id="ttp">Texto</a></li>
+                    </ul>
+                </div>
+                <button class="btn btn-warning" type="submit" id="bcuadro">Cuadro de Texto</button>
+                <button class="btn btn-warning" type="submit" id="bboton">Botón</button>
+                <button class="btn btn-warning" type="submit" id="benlace">enlaces</button>
+                <button class="btn btn-warning" type="submit" id="blistas">Listas</button>
+                <button class="btn btn-warning" type="submit" id="blcanvas">Canvas</button>
+                <button class="btn btn-danger navbar-nav navbar-right" type="submit" id="vistapre">Vista Previa</button>
+                MODIFICAR:
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tipo de letra<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="tlserif" valor="serif">Serif</a></li>
+                        <li><a href="#" id="tlsans" valor="sans-serif">Sans-serif</a></li>
+                        <li><a href="#" id="tlmono" valor="monospace">monospace</a></li>
+                        <li><a href="#" id="tlcursive" valor="cursive">Cursive</a></li>
+                        <li><a href="#" id="tlfantasy" valor="fantasy">Fantasy</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tamaño de letra <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="tl8" valor="8pt">8</a></li>
+                        <li><a href="#" id="tl12" valor="12pt">12</a></li>
+                        <li><a href="#" id="tl16" valor="16pt">16</a></li>
+                        <li><a href="#" id="tl20" valor="20pt">20</a></li>
+                    </ul>
+                </div>
+                <input id="letrac" type="color" ></input>
+            </nav>
+        </header>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <div class="navbar-nav navbar-left" id="musica">
+                    <iframe width='600' height='90' allow='autoplay' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'></iframe>
+                </div>
+                <div class="navbar-nav navbar-right" id="">
+                    <label for="">Proyecto realizado por Castillo 2ºDaW  I.E.S. Doñana</label>
+                </div>
+            </div>
+        </nav>
+
+        <!--Insertamos el archivo JS compilado y comprimido -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -3,7 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>DIW Castillo</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="jquery-3.3.1.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
         <style media="screen">
             body{
                 margin: 0;
@@ -105,6 +109,8 @@
                 }
                 tbl.appendChild(tblBody);
                 tbl.setAttribute("border", "2");
+                $(`#tabla${contadorTabla}`).draggable();
+                contadorTabla++;
 
             }
 
@@ -132,7 +138,7 @@
         <header>
             <input type="checkbox" id="btn-menu">
             <label for="btn-menu"><img id="botonm" src="./img/iconos/botonMenu.png" alt=""></label>
-            <nav class="menu">
+            <nav>
                 <ul>
                     <li><a id="insert" href="">Modificar Fondo</a>
                         <ul>
@@ -192,11 +198,26 @@
         <div class="">
             <iframe width='100' height='300' scrolling='no' frameborder='no' allow='autoplay' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'></iframe>
         </div>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="checkbox" autocomplete="off" checked> Checkbox 1 (pre-checked)
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off"> Checkbox 2
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off"> Checkbox 3
+            </label>
+        </div>
 
         <div class="">
-            <table id="tabla">
+            <table id="tabla" class="table table-bordered">
 
             </table>
         </div>
+        <!--Insertamos jQuery dependencia de Bootstrap-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!--Insertamos el archivo JS compilado y comprimido -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>
 </html>
