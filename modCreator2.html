@@ -8,6 +8,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <style media="screen">
+            p{
+
+            }
+        </style>
         <script>
             var contadorTabla=0;
             var contadorTitulo=0;
@@ -20,55 +25,75 @@
 
             function agregarInput() {
                 var entrada=prompt("Texto al lado del cuadro");
-                $("body").append(`<input id="inp${contadorInput}" type="text" name="input${contadorInput}" value=""><label for="input${contadorInput}">${entrada}</label>`);
-                $(`#inp${contadorInput}`).draggable();
+                $("body").append(`<div id="divinp${contadorInput}"><input id="inp${contadorInput}" type="text" name="input${contadorInput}" value=""><label for="input${contadorInput}">${entrada}</label></div>`);
+                $(`#divinp${contadorInput}`).draggable();
+                $(`#divinp${contadorInput}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorInput++;
 
             }
 
             function agregarLista() {
                 var entrada=prompt("Texto");
-                $("body").append(`<li id="lis${contadorLista}">${entrada}</li>`);
-                $(`#lis${contadorLista}`).draggable();
+                $("body").append(`<div id="divlis${contadorLista}"><li id="lis${contadorLista}">${entrada}</li></div>`);
+                $(`#divlis${contadorLista}`).draggable();
+                $(`#divlis${contadorLista}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorLista++;
             }
             function agregarCanvas() {
-                $("body").append(`<canvas id="canvas${contadorCanvas}" width="200" height="100" style="border:1px solid #000FFF;"></canvas>`);
-                $(`#canvas${contadorCanvas}`).draggable();
-                $(`#canvas${contadorCanvas}`).dblclick(function () {
-                    $(`#canvas${contadorCanvas}`).draggable("option", "disabled", true );
+                $("body").append(`<div id="divcanvas${contadorCanvas}"><canvas id="canvas${contadorCanvas}" width="200" height="100" style="border:1px solid #000FFF;"></canvas></div>`);
+                $(`#divcanvas${contadorCanvas}`).draggable();
+                $(`#divcanvas${contadorCanvas}`).dblclick(function () {
+                    this.remove();
                 });
                 contadorCanvas++;
             }
             function agregarEnlace() {
                 var entrada=prompt("Texto de enlace");
                 var url= prompt("Escribe la URL");
-                $("body").append(`<a href="${url}" id="enlace${contadorEnlace}">${entrada}</a>`);
-                $(`#enlace${contadorEnlace}`).draggable();
+                $("body").append(`<div id="divenlace${contadorEnlace}"><a href="${url}" id="enlace${contadorEnlace}">${entrada}</a></div>`);
+                $(`#divenlace${contadorEnlace}`).draggable();
+                $(`#divenlace${contadorEnlace}`).dblclick(function () {
+                    this.remove();
+                });
 
                 contadorEnlace++;
             }
+
             function agregarBoton() {
                 var entrada=prompt("¿Cómo se llamará el botón?");
-                $("body").append(`<button class="btn btn-default" type="button" id="boton${contadorBoton}">${entrada}</button>`);
-                $(`#boton${contadorBoton}`).draggable();
+                $("body").append(`<div id="divboton${contadorBoton}"><button class="btn btn-default" type="button" id="boton${contadorBoton}">${entrada}</button></div>`);
+                $(`#divboton${contadorBoton}`).draggable();
+                $(`#divboton${contadorBoton}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorBoton++;
             }
             function agregarTexto() {
                 var entrada=prompt("Introduce un texto");
-                $("body").append(`<p id="pa${contadorParrafos}">${entrada}</p>`);
-                $(`#pa${contadorParrafos}`).draggable();
+                $("body").append(`<div id="divpa${contadorParrafos}"><p id="pa${contadorParrafos}">${entrada}</p></div>`);
+                $(`#divpa${contadorParrafos}`).draggable();
+                $(`#divpa${contadorParrafos}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorParrafos++;
             }
             function agregarTitulo(valor) {
                 var entrada=prompt("Introduce un titulo");
-                $("body").append(`<h${valor} id="titulo${contadorTitulo}">${entrada}</h${valor}>`);
-                $(`#titulo${contadorTitulo}`).draggable();
+                var color=prompt("Introduce un color (red, blue, grey)");
+                $("body").append(`<div id="divh1${contadorTitulo}"><h${valor} style="color:${color} "id="titulo${contadorTitulo}">${entrada}</h${valor}></div>`);
+                $(`#divh1${contadorTitulo}`).draggable();
+                $(`#divh1${contadorTitulo}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorTitulo++;
             }
 
             function agregarTabla(filas, columna) {
-                $("body").append(`<div><table id="tabla${contadorTabla}"></table></div>`);
+                $("body").append(`<div id="divtabla${contadorTabla}"><table id="tabla${contadorTabla}"></table></div>`);
                 var tbl = document.getElementById(`tabla${contadorTabla}`);
                 var tblBody = document.createElement("tbody");
                 for (var i = 0; i < columna; i++) {
@@ -88,7 +113,10 @@
 
                 tbl.appendChild(tblBody);
                 tbl.setAttribute("border", "2");
-                $(`#tabla${contadorTabla}`).draggable();
+                $(`#divtabla${contadorTabla}`).draggable();
+                $(`#divtabla${contadorTabla}`).dblclick(function () {
+                    this.remove();
+                });
                 contadorTabla++;
             }
 
@@ -98,7 +126,7 @@
                     $("body").css("background",$(this).val());
                 });
                 $("#letrac").change(function () {
-                    $("body").css("color",$(this).val());
+                    $("p").css("color",$(this).val());
                 });
 
                 $("#tlserif").click(function () {
@@ -130,28 +158,38 @@
                 });
 
                 $("#tt").click(function () {
-                    agregarTitulo(1)
+                    agregarTitulo(1);
+                    $("#vistapre").show();
                 });
                 $("#tt2").click(function () {
-                    agregarTitulo(3)
+                    agregarTitulo(3);
+                    $("#vistapre").show();
                 });
                 $("#tt4").click(function () {
-                    agregarTitulo(4)
+                    agregarTitulo(4);
+                    $("#vistapre").show();
                 });
                 $("#ttp").click(function () {
                     agregarTexto();
+                    $("#vistapre").show();
                 });
 
                 $("#bboton").click(function () {
                     agregarBoton();
+                    $("#vistapre").show();
                 });
                 $("#benlace").click(function () {
                     agregarEnlace();
+                    $("#vistapre").show();
                 });
 
                 $("#vistapre").click(function () {
                     $("#musica").hide();
                     $("#menus").hide();
+                    $("*").dblclick(function () {
+                        $("#musica").show();
+                        $("#menus").show();
+                    });
                 });
 
 
@@ -167,6 +205,8 @@
                     var column=parseInt(prompt("Introduce un número de columnas"));
                     if(expr.test(filas)&& expr.test(column)){
                         agregarTabla(filas,column);
+                        $("#vistapre").show();
+
                     }else{
                         alert("Insertar un número del 1 al 9");
                     }
@@ -184,6 +224,8 @@
                 });
 
                 $("#musica").draggable();
+
+                $("#vistapre").hide();
 
             });
         </script>
@@ -219,6 +261,7 @@
                         <li><a href="#" id="ttp">Texto</a></li>
                     </ul>
                 </div>
+
                 <button class="btn btn-warning" type="submit" id="bcuadro">Cuadro de Texto</button>
                 <button class="btn btn-warning" type="submit" id="bboton">Botón</button>
                 <button class="btn btn-warning" type="submit" id="benlace">enlaces</button>
